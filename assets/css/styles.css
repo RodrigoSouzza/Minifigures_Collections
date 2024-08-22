@@ -30,14 +30,14 @@ a {
     text-decoration: none;
     font-size: 1.5rem;
     color: #2D3436;
-    border-radius: 10px;
+    border-radius: 20px;
     transition: .8s;
 }
 
 a:hover {
     background-color:#E74C3C;
     color: #ECF0F1;
-    border-radius: 10px;
+    border-radius: 20px;
 }
 
 main {
@@ -73,6 +73,7 @@ input:focus {
 input::placeholder {
     text-align: center;
     color: #2D3436;
+    opacity: .8;
 }
 
 #minifigures_list {
@@ -118,27 +119,47 @@ input::placeholder {
 }
 
 #criacao {
-    display: flex;    
-    margin-top: 60px;
-    justify-content: space-around;
+    display:flex;
+    margin: 60px;
+    gap: 200px;
 }
 
 #criacao h2 {
     margin-bottom: 15px;
-}
-
-#criacao label {
-    margin: 10px 5px;
-    font-size: 20px;
+    text-align: center;
 }
 
 #criacao input {    
-    margin: 10px;
+    margin: 10px 10px;
     padding: 5px;
     border:none;
-    border-radius: 0px 20px 20px 0px;
     width: 90%;
     background-color: #ECF0F1;
+    font-size: 16px;
+}
+
+#criacao  ::placeholder{
+    font-size: 16px;
+    opacity: .8;
+}
+
+#criacao button {
+    padding: 15px;
+    font-size: 16px;
+    background-color: #F39C12;
+    color: #2D3436;
+    border: none;
+    border-radius: 20px;
+    transition: .8s;
+    
+}
+
+#criacao button:hover {
+    background-color: #E74C3C;
+    color: #ECF0F1;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
 }
 
 .nova_minifigure {
@@ -155,4 +176,7 @@ input::placeholder {
     border-radius: 20px;
 }
 
-
+footer {
+    text-align: center;
+    margin-bottom: 10px;    
+}
