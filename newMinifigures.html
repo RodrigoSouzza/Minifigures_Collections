@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- link css -->
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <!-- link fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lilita+One&display=swap" rel="stylesheet">
+    <!-- link javascript -->
+    <script src="/assets/js/newMinifigure.js" defer></script>
+    <title>Minifigures Collections</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">INÍCIO</a></li>
+                <li><a href="newMinifigures.html">NOVA MINIFIGURE</a></li>
+                <li><a href="minifigures.html">MINIFIGURES</a></li>
+                <li><a href="collections.html">COLEÇÕES</a></li>
+            </ul>
+        </nav>        
+    </header>
+    <main>
+        <h1>MINIFIGURES <br> COLLECTIONS</h1>        
+        <div id="criacao">
+            <div class="nova_minifigure">
+                <h2>CRIAR MINIFIGURE</h2>
+                <input type="text" name="name" id="nameFigure" placeholder="nome da minifigure">
+                <input type="text" name="colecao" id="colecaoFigure" placeholder="nome da coleção">
+                <input type="text" name="imagem" id="imagemFigure" placeholder="URL da imagem"> 
+                <select name="status" id="status">
+                    <option value="ja-tenho" selected>já tenho</option>
+                    <option value="nao-tenho">não tenho</option>
+                </select>
+                <button id="criarMiniFigure">criar minifigure</button>                
+            </div>
+            <div class="nova_colecao">
+                <h2>CRIAR COLEÇÃO</h2>
+                <input type="text" name="name" id="nameColecao" placeholder="nome da coleção">
+                <input type="text" name="imagem" id="imagemColecao" placeholder="URL da imagem">                
+                <button id="criarColecao">criar coleção</button>               
+            </div>
+        </div>
+    </main>
+    <footer>
+        <P>&#169; 2024 Criado e desenvolvido por Rodrigo Souza</P>
+    </footer>
+</body>
+</html>

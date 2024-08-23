@@ -96,8 +96,11 @@ input::placeholder {
     height: 200px;
 }
 
-.minifigure button {
-    margin-top: 10px;
+.minifigure p {
+    margin-bottom: 10px;
+}
+
+.minifigure .situacao {
     padding: 8px 15px;
     border: none;
     border-radius: 20px;
@@ -105,17 +108,32 @@ input::placeholder {
     color: #ECF0F1;
 }
 
-.minifigure button:hover {
+.minifigure .situacao-comprado {
     padding: 8px 15px;
     border: none;
     border-radius: 20px;
-    background-color: #C0392B;
+    background-color: #F39C12;
     color: #ECF0F1;
-    cursor: pointer;
 }
 
-.minifigure button.comprado {
-    background-color: #F39C12;
+#colecao_list {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 10px;
+    text-align: center;
+}
+
+.colecao {    
+    background-color: #F1C40F;
+    width: 250px;
+    height: auto;
+    margin: 15px;
+    padding: 20px;
+}
+
+.colecao img {
+    width: 200px;
+    height: 200px;
 }
 
 #criacao {
@@ -169,6 +187,16 @@ input::placeholder {
     border-radius: 20px;
 }
 
+.nova_minifigure select {
+    display: block;
+    margin: 10px;
+    border: none;
+    padding: 5px;
+    background-color: #ECF0F1;
+    color: #2D3436;
+    font-size: 16px;
+}
+
 .nova_colecao {
     background-color: #F1C40F;
     width: 40%;
@@ -178,5 +206,5 @@ input::placeholder {
 
 footer {
     text-align: center;
-    margin-bottom: 10px;    
+    margin-top: 90px;        
 }
