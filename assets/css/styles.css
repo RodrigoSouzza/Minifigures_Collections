@@ -65,16 +65,32 @@ input {
     border-radius: 20px;
 }
 
-input:focus {
-    box-shadow: 0 0 0 0;
-    border: 0 none;
-    outline: 0;
-}
 
 input::placeholder {
     text-align: center;
     color: #2D3436;
     opacity: .8;
+}
+
+button {
+    margin-left: 15px;
+    padding: 10px;
+    font-size: 24px;
+    background-color: #F1C40F;
+    color: #2D3436;
+    border: none;
+    border-radius: 15px;
+    transition: .8s;
+    
+    
+}
+
+button:hover {
+    background-color: #E74C3C;
+    color: #ECF0F1;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
 }
 
 #minifigures_list {
