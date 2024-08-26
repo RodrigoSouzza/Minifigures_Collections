@@ -20,10 +20,19 @@ function renderMinifigure() {
         const colecaoMinifigure = document.createElement("p")
         colecaoMinifigure.innerText = minifigure.colecao
 
+        const statusMinifigure = document.createElement("span")
+        if(minifigure.status == "ja-tenho"){
+            statusMinifigure.className = "situacao-comprado"
+            statusMinifigure.innerText = "já tenho"
+        }else {
+            statusMinifigure.className = "situacao"
+            statusMinifigure.innerText = "não tenho"
+        }
+        
         newMinifigure.appendChild(imageMinifigure)
         newMinifigure.appendChild(nomeMinifigure)
         newMinifigure.appendChild(colecaoMinifigure)
-
+        newMinifigure.appendChild(statusMinifigure)
         minifigureList.appendChild(newMinifigure)
     })
 }

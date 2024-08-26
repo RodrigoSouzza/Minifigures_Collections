@@ -50,6 +50,7 @@ h1 {
     color: #C0392B;
     text-align: center;
     text-shadow: 2px 2px 4px black;
+    margin-bottom: 25px;
 }
 
 input {
@@ -187,6 +188,10 @@ input::placeholder {
     border-radius: 20px;
 }
 
+#criarMiniFigure {
+    margin-left: 180px;
+} 
+
 .nova_minifigure select {
     display: block;
     margin: 10px;
@@ -204,7 +209,14 @@ input::placeholder {
     border-radius: 20px;
 }
 
+#criarColecao {
+    margin-top: 50px;
+    margin-left: 190px;
+    
+}
+
 footer {
     text-align: center;
-    margin-top: 90px;        
+    margin-top: 200px;  
+    margin-bottom: 10px;      
 }
