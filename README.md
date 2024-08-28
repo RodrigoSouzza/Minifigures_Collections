@@ -14,7 +14,7 @@ Página inicial, mostrando uma barra de navegação com as seguintes opções de
 
 **Inicio**
 
-    Essa é a pagina inicial, possui apenas a barra de navegação o nome do projeto centralizado e a barra de pesquisa.
+Essa é a pagina inicial, possui apenas a barra de navegação o nome do projeto centralizado e a barra de pesquisa.
 
 - **Nova minifigures**
     
