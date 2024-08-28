@@ -1,23 +1,37 @@
-### Esse projeto trata-se de um gerenciador, que vou desenvolver para gerenciar minha coleção de mini figuras de lego.
+Projeto desenvolvido com HTML, CSS E JAVASCRIPT! 
 
-O projeto será desenvolvido com html, css e javascript INICIALMENTE, para armazenar os dados ainda não sei se vou usar “local storage” ou algum “banco de dados”. 
+### DO QUE SE TRATA O PROJETO
 
-### Ideias iniciais
+Esse projeto foi desenvolvido com o intuito de suprir uma necessidade pessoal. Eu tenho uma coleçao de "minifigures" de lego que com o passar do tempo vem ficando cada vez maior, visto que não encontrei nada no "mercado", para suprir a necessidade de algo que possa auxiliar na minha "gestão" da coleção, resolvi unir o útil ao agradável. Como eu venho estudando procurando aprofundar meus conhecimentos em programação, decide eu mesmo desenvolver meu "gerenciador de coleção". Um projeto que além de por em prova meus conhecimentos, vai resolver uma "dor" minha.
 
-o projeto terá até então as seguintes paginas e funcionalidades :
+### CORPO DO PROJETO
 
-página inicial, mostrando uma barra de navegação com as seguintes opções de navegação: (inicio, nova minifigures, minifigures e coleções e uma barra de pesquisa no fim, onde pode ser pesquisado mini figuras avulso ou coleções.   
+o projeto possui as seguintes funcionalidades:
 
-### Falando sobre cada opção de navegação
+Página inicial, mostrando uma barra de navegação com as seguintes opções de navegação: (inicio, nova minifigures, minifigures e coleções e uma barra de pesquisa no fim, onde pode ser pesquisado minifigures separadamente ou por coleções).   
 
-- **nova minifigures**
+### FUNCIONALIDADES
+
+**Inicio**
+
+    Essa é a pagina inicial, possui apenas a barra de navegação o nome do projeto centralizado e a barra de pesquisa.
+
+- **Nova minifigures**
     
-    essa seção ficará destinada a inserir novas mini figuras ou coleções no gerenciador, cada mini figuras terá as informações (nome, coleção, imagem ou url da imagem, e situação se já foi ou não comprada). Da mesma forma a nova coleção seguirá da mesma forma.
+    Essa seção é uma das principais, pois é por ela que é inserido toda nova minifigure e toda nova coleção.
+
+    No menu de CRIAÇÃO DE COLEÇÃO, estão as seguintes informações (um titúlo "CRIAR COLEÇÃO", um campo para inserir do nome da coleção e um campo para adicionar a url de alguma imagem para ser a "capa" da coleção e pra finalizar um botão onde é criado a coleção.) OBS: A coleção não é criada se todos os campos não forem preenchidos.
+
+    No menu de CRIAÇÃO DE MINIFIGURE, estão as seguintes informações (um titúlo CRIAR MINIFIGURE, um campo para inserir o nome da minifigure(personagem), a url da imagem da minifigure, um campo "select", onde mostra todas as coleções já criadas, para ser adicionado na minifigure, um campo "select" com duas opções (já tenho e não tenho) e um botão criar minifigure para criar a minifigure). OBS: a minifigure não é criado se todos os campos não forem preenchidos.
+
+- **Minifigures**
     
-- **minifigures**
+    Essa seção mostra todas as minifigures já inseridas no programa. Independente de coleção são mostradas na ordem em que foram inseridas. 
     
-    Essa seção mostrará todas as mini figuras já adicionadas no projeto, independente de coleção serão listadas todas. 
+- **Coleções**
     
-- **coleções**
-    
-    Essa seção mostrará todas as coleções já adicionadas no gerenciador. Mostrando as informações principais como (quantidade de mini figuras e nome). Clicando no botão (VER) será aberto uma janela modal mostrando todas figuras contidas na coleção em questão.
+    Essa seção mostra todas as coleções já criadas, com o nome da coleção e quantidade de minifigures que possui na coleção. Clicando no botão "mostrar", abre uma janela "MODAL" mostrando todas as minifigures da respectiva coleção.
+
+### DETALHES DO PROJETO
+
+Todas as minifigures e coleções estão sendo armazenadas em "local Storage" no próprio navegador, mas futuramente estarei inserindo algum banco de dados para lhe dar com essa situação.
