@@ -1,11 +1,13 @@
 window.addEventListener("load", renderMinifigure)
 
+let minifigureData = JSON.parse(localStorage.getItem("minifiguresList"))
+
 function renderMinifigure() {
-    let minifigureData = JSON.parse(localStorage.getItem("minifiguresList"))
     
-    minifigureData.forEach((minifigure) =>{
-         
-        const minifigureList = document.querySelector("#minifigures_list")
+    const minifigureList = document.querySelector("#minifigures_list")
+    minifigureList.innerHTML = "" 
+    
+    minifigureData.forEach((minifigure, index) =>{       
 
         const newMinifigure = document.createElement("div")
         newMinifigure.className = "minifigure"
@@ -31,14 +33,18 @@ function renderMinifigure() {
         const excluir = document.createElement("button")
         excluir.setAttribute("id", "excluir")
         excluir.innerText = "excluir"
-        excluir.addEventListener("click", excluirMinifigure)
+        excluir.addEventListener("click", () => excluirMinifigure(index))
         
         newMinifigure.append(imageMinifigure, nomeMinifigure, colecaoMinifigure, statusMinifigure, excluir)
         minifigureList.appendChild(newMinifigure)
     })
 }  
 
-function excluirMinifigure(){
-    console.log("funcionou")
+function excluirMinifigure(index) {
+    minifigureData.splice(index, 1)
+
+    localStorage.setItem("minifiguresList", JSON.stringify(minifigureData))
+
+    renderMinifigure()
 }
 
