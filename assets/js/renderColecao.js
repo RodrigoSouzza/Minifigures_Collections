@@ -3,11 +3,14 @@ window.addEventListener("load", renderColecao)
 let colecaoData = JSON.parse(localStorage.getItem("colecaoList"))
 let minifiguresList = JSON.parse(localStorage.getItem("minifiguresList")) || []
 
+ 
+
 function renderColecao() {    
     
-    const colecaoList = document.querySelector("#colecao_list")    
+    const colecaoList = document.querySelector("#colecao_list")
+    colecaoList.innerHTML = "" 
     
-    colecaoData.forEach(colecao => {  
+    colecaoData.forEach((colecao, index) => {  
         
         const newColecao = document.createElement("div")
         newColecao.className = "colecao"
@@ -29,7 +32,12 @@ function renderColecao() {
         mostrarMinifigures.innerText = "mostrar"
         mostrarMinifigures.addEventListener("click", exibirColecao)
 
-        newColecao.append(imageColecao, nomeColecao, quantidade, mostrarMinifigures)
+        const excluir = document.createElement("button")
+        excluir.setAttribute("id", "excluir")
+        excluir.innerText = "excluir"
+        excluir.addEventListener("click", () => excluirColecao(index))
+
+        newColecao.append(imageColecao, nomeColecao, quantidade, mostrarMinifigures, excluir)
         colecaoList.appendChild(newColecao)         
     })
 }
@@ -86,6 +94,14 @@ function exibirModal(){
     }else{
         modal.style.display = "block"
     }
+}
+
+function excluirColecao(index) {
+    colecaoData.splice(index, 1)
+
+    localStorage.setItem("colecaoList", JSON.stringify(colecaoData))
+
+    renderColecao()
 }
 
 btnFechar.addEventListener("click", exibirColecao)
