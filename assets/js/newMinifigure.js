@@ -1,55 +1,68 @@
-const btnCriarFigure = document.querySelector("#criarMiniFigure")
-const btnCriarColecao = document.querySelector("#criarColecao")
+// campos minifigure
+const urlImagem = document.getElementById("imagemFigure")
+const nomeMinifigure = document.getElementById("nameFigure")
+const colecao = document.getElementById("colecao")
+const situacao = document.getElementById("status")
+
+// campos colecao
+const urlImagemColecao = document.getElementById("imagemColecao")
+const nomeColecao = document.getElementById("nameColecao")
+
+// botões
+const btnCriarFigure = document.getElementById("criarMiniFigure")
+const btnCriarColecao = document.getElementById("criarColecao")
+
+// dados do local Storage
+let minifiguresList = JSON.parse(localStorage.getItem("minifiguresList")) || []
+let colecaoList = JSON.parse(localStorage.getItem("colecaoList")) || []
 
 // FUNÇÕES
-function addMinifigure(){
-    const urlImagem = document.querySelector("#imagemFigure").value.trim()
-    const nomeMinifigure = document.querySelector("#nameFigure").value.trim()
-    const nomeColecao = document.querySelector("#colecaoFigure").value.trim()
-    const situacao = document.querySelector("#status").value.trim()
+function atualizarListaColecao(){
+    colecaoList.forEach(colecao => {
+    let optionColecao = document.getElementById("colecao")
+    const option = document.createElement("option")
+    option.value = colecao.nome
+    option.innerText = colecao.nome
+
+    optionColecao.appendChild(option)
+    })
+}
+atualizarListaColecao()
+
+function criarMinifigure(){
     
-    if(!urlImagem || !nomeMinifigure || !nomeColecao){
+    if(urlImagem.value == "" || nomeMinifigure.value == "" || colecao.value == ""){
         alert("É necessário preencher todos os campos!")
         return
     }
-
     const minifigure = {
-        url: urlImagem,
-        nome: nomeMinifigure,
-        colecao: nomeColecao,
-        status: situacao
-    }
-
-    let minifiguresList = JSON.parse(localStorage.getItem("minifiguresList")) || []
+        url: urlImagem.value,
+        nome: nomeMinifigure.value,
+        colecao: colecao.value,
+        status: situacao.value
+    }    
     minifiguresList.push(minifigure)
-    localStorage.setItem("minifiguresList", JSON.stringify(minifiguresList))  
-    
+    localStorage.setItem("minifiguresList", JSON.stringify(minifiguresList)) 
     alert("Minifigure criada com sucesso!")
 }
 
-function addColecao(){
-    const urlImagemColecao = document.querySelector("#imagemColecao").value.trim()
-    const nomeColecao = document.querySelector("#nameColecao").value.trim()
+function addColecao(){    
     
-    if(!urlImagemColecao || !nomeColecao){
+    if(urlImagemColecao.value == "" || nomeColecao == ""){
         alert("É necessário preencher todos os campos!")
         return
     }
-
     const colecao = {
-        url: urlImagemColecao,
-        nome: nomeColecao
-    }
-
-    let colecaoList = JSON.parse(localStorage.getItem("colecaoList")) || []
+        url: urlImagemColecao.value,
+        nome: nomeColecao.value,
+    }    
     colecaoList.push(colecao)
     localStorage.setItem("colecaoList", JSON.stringify(colecaoList))
-
-    alert("Coleção criado com sucesso!")
+    alert("Coleção criado com sucesso!")    
 }
 
 // EVENTOS
-btnCriarFigure.addEventListener("click", addMinifigure)
+btnCriarFigure.addEventListener("click", criarMinifigure)
 btnCriarColecao.addEventListener("click", addColecao)
 
 

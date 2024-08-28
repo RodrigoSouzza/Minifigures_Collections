@@ -16,7 +16,6 @@ function exibirBusca(){
             newMinifigure.className = "minifigure"
 
             const imageMinifigure = document.createElement("img")
-
             imageMinifigure.setAttribute("src", minifigure.url)        
         
             const nomeMinifigure = document.createElement("h2")
@@ -26,7 +25,6 @@ function exibirBusca(){
             colecaoMinifigure.innerText = minifigure.colecao
 
             const statusMinifigure = document.createElement("span")
-
             if(minifigure.status == "ja-tenho"){
                 statusMinifigure.className = "situacao-comprado"
                 statusMinifigure.innerText = "já tenho"
@@ -35,11 +33,7 @@ function exibirBusca(){
                 statusMinifigure.innerText = "não tenho"
             }
         
-            newMinifigure.appendChild(imageMinifigure)
-            newMinifigure.appendChild(nomeMinifigure)
-            newMinifigure.appendChild(colecaoMinifigure)
-            newMinifigure.appendChild(statusMinifigure)
-
+            newMinifigure.append(imageMinifigure, nomeMinifigure, colecaoMinifigure, statusMinifigure)
             minifigureList.appendChild(newMinifigure)
         }       
     })    

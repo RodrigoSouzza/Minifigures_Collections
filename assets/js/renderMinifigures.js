@@ -11,7 +11,6 @@ function renderMinifigure() {
         newMinifigure.className = "minifigure"
 
         const imageMinifigure = document.createElement("img")
-
         imageMinifigure.setAttribute("src", minifigure.url)        
         
         const nomeMinifigure = document.createElement("h2")
@@ -28,11 +27,18 @@ function renderMinifigure() {
             statusMinifigure.className = "situacao"
             statusMinifigure.innerText = "não tenho"
         }
+
+        const excluir = document.createElement("button")
+        excluir.setAttribute("id", "excluir")
+        excluir.innerText = "excluir"
+        excluir.addEventListener("click", excluirMinifigure)
         
-        newMinifigure.appendChild(imageMinifigure)
-        newMinifigure.appendChild(nomeMinifigure)
-        newMinifigure.appendChild(colecaoMinifigure)
-        newMinifigure.appendChild(statusMinifigure)
+        newMinifigure.append(imageMinifigure, nomeMinifigure, colecaoMinifigure, statusMinifigure, excluir)
         minifigureList.appendChild(newMinifigure)
     })
+}  
+
+function excluirMinifigure(){
+    console.log("funcionou")
 }
+
