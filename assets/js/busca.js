@@ -10,7 +10,7 @@ function exibirBusca(){
     
     minifigureData.forEach((minifigure) =>{
 
-        if(pesquisaInput.value == minifigure.nome) {            
+        if(pesquisaInput.value == minifigure.nome || pesquisaInput.value == minifigure.colecao) {            
 
             const newMinifigure = document.createElement("div")
             newMinifigure.className = "minifigure"
