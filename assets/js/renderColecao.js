@@ -1,84 +1,58 @@
 window.addEventListener("load", renderColecao)
 
-let colecaoData = JSON.parse(localStorage.getItem("colecaoList"))
-let minifiguresList = JSON.parse(localStorage.getItem("minifiguresList")) || []
+const colecaoData = JSON.parse(localStorage.getItem("colecaoList"))
+const minifiguresList = JSON.parse(localStorage.getItem("minifiguresList")) || [] 
 
- 
+function criarElemento(tag, className, innerText, attributes = {}) {    
+    const elemento = document.createElement(tag)
+    if(className) elemento.className = className
+    if(innerText) elemento.innerText = innerText
 
-function renderColecao() {    
-    
+    Object.keys(attributes).forEach(attr => elemento.setAttribute(attr, attributes[attr]))
+    return elemento
+}
+
+function renderColecao(){    
     const colecaoList = document.querySelector("#colecao_list")
     colecaoList.innerHTML = "" 
-    
     colecaoData.forEach((colecao, index) => {  
-        
-        const newColecao = document.createElement("div")
-        newColecao.className = "colecao"
-        newColecao.id = colecao.nome
-        
-        const imageColecao = document.createElement("img")
-        imageColecao.setAttribute("src", colecao.url)        
-        
-        const nomeColecao = document.createElement("h2")
-        nomeColecao.innerText = colecao.nome  
-        
+        const newColecao = criarElemento("div", "colecao", null, {id: colecao.nome})
+        const imageColecao = criarElemento("img", null, null, {src: colecao.url })
+        const nomeColecao = criarElemento("h2", null, colecao.nome)
         const quantidadeMinifigures = minifiguresList.filter(minifigure => minifigure.colecao === colecao.nome).length
-
-        const quantidade = document.createElement("p")
-        quantidade.innerText = `${quantidadeMinifigures} minifigures`        
-
-        const mostrarMinifigures = document.createElement("button")
-        mostrarMinifigures.setAttribute("id", "mostrarMinifigures")
-        mostrarMinifigures.innerText = "mostrar"
+        const quantidade = criarElemento("p", null, `${quantidadeMinifigures} minifigures`)
+        const mostrarMinifigures = criarElemento("button", null, "mostrar", {id: "mostrarMinifigures"})
         mostrarMinifigures.addEventListener("click", exibirColecao)
-
-        const excluir = document.createElement("button")
-        excluir.setAttribute("id", "excluir")
-        excluir.innerText = "excluir"
+        
+        const excluir = criarElemento("button", null, "excluir", {id: "excluir"})
         excluir.addEventListener("click", () => excluirColecao(index))
-
+        
         newColecao.append(imageColecao, nomeColecao, quantidade, mostrarMinifigures, excluir)
         colecaoList.appendChild(newColecao)         
     })
-}
+}   
 
-const btnFechar = document.getElementById("fecharModal")
-
-function exibirColecao(event) {
-    
+function exibirColecao(event) {    
     const conteudoModal = document.querySelector(".conteudo")
     conteudoModal.innerHTML = " " 
 
     minifiguresList.forEach(minifigure => {
         if(minifigure.colecao == event.target.parentElement.id){          
            
-           const newMinifigure = document.createElement("div")
-            newMinifigure.className = "minifigure"
-
-            const imageMinifigure = document.createElement("img")
-            imageMinifigure.setAttribute("src", minifigure.url)        
-        
-            const nomeMinifigure = document.createElement("h2")
-            nomeMinifigure.innerText = minifigure.nome
-
-            const colecaoMinifigure = document.createElement("p")
-            colecaoMinifigure.innerText = minifigure.colecao
-
-            const statusMinifigure = document.createElement("span")
-            if(minifigure.status == "ja-tenho"){
-                statusMinifigure.className = "situacao-comprado"
-                statusMinifigure.innerText = "já tenho"
-            }else {
-                statusMinifigure.className = "situacao"
-                statusMinifigure.innerText = "não tenho"
-            }
+           const newMinifigure = criarElemento("div", "minifigure")
+           const imageMinifigure = criarElemento("img", null, null, {src: minifigure.url})
+           const nomeMinifigure = criarElemento("h2", null, minifigure.nome)
+           const colecaoMinifigure = criarElemento("p", null, minifigure.colecao)
+           
+           const statusClass = minifigure.status === "ja-tenho" ? "situacao-comprado" : "situacao"
+           const statusMinifigure = criarElemento("span", statusClass, minifigure.status === "ja-tenho" ? "ja tenho" : "nao tenho") 
+            
             newMinifigure.append(imageMinifigure, nomeMinifigure, colecaoMinifigure, statusMinifigure)
             conteudoModal.appendChild(newMinifigure)
         }
     })
-    const btnVoltar = document.createElement("button")
-    btnVoltar.setAttribute("id", "fecharModal")
-    btnVoltar.innerText = "Voltar"
+
+    const btnVoltar = criarElemento("button", null, "Voltar", {id: "fecharModal"})
     btnVoltar.addEventListener("click", exibirModal)
 
     conteudoModal.appendChild(btnVoltar)
@@ -88,35 +62,13 @@ function exibirColecao(event) {
 
 function exibirModal(){
     const modal = document.querySelector(".janela-modal")
-    const estiloAtual = modal.style.display
-    if(estiloAtual == "block"){
-        modal.style.display = "none"
-    }else{
-        modal.style.display = "block"
-    }
+    modal.style.display = modal.style.display === "block" ? "none" : "block"
 }
 
-function excluirColecao(index) {
+function excluirColecao(index) {    
     colecaoData.splice(index, 1)
-
     localStorage.setItem("colecaoList", JSON.stringify(colecaoData))
 
     renderColecao()
-}
+}    
 
-btnFechar.addEventListener("click", exibirColecao)
-
-
-
-
-
-
-
-
-
-
-       
-
-
-
-     

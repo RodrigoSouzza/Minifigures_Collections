@@ -18,20 +18,18 @@ let colecaoList = JSON.parse(localStorage.getItem("colecaoList")) || []
 
 // FUNÇÕES
 function atualizarListaColecao(){
-    colecaoList.forEach(colecao => {
-    let optionColecao = document.getElementById("colecao")
-    const option = document.createElement("option")
-    option.value = colecao.nome
-    option.innerText = colecao.nome
-
-    optionColecao.appendChild(option)
+    colecao.innerHTML = ""
+    colecaoList.forEach(colecaoItem => {
+        const option = document.createElement("option")
+        option.value = colecaoItem.nome
+        option.innerText = colecaoItem.nome
+        colecao.appendChild(option)
     })
 }
-atualizarListaColecao()
 
-function criarMinifigure(){
-    
-    if(urlImagem.value == "" || nomeMinifigure.value == "" || colecao.value == ""){
+
+function criarMinifigure(){    
+    if(!urlImagem.value || !nomeMinifigure.value || !colecao.value){
         alert("É necessário preencher todos os campos!")
         return
     }
@@ -40,30 +38,42 @@ function criarMinifigure(){
         nome: nomeMinifigure.value,
         colecao: colecao.value,
         status: situacao.value
-    }    
-    minifiguresList.push(minifigure)
-    localStorage.setItem("minifiguresList", JSON.stringify(minifiguresList)) 
+    }
+    salvarMinifigure(minifigure)    
     alert("Minifigure criada com sucesso!")
 }
 
+function salvarMinifigure(minifigure){
+    minifiguresList.push(minifigure)
+    localStorage.setItem("minifiguresList", JSON.stringify(minifiguresList))
+}
+
 function addColecao(){    
-    
-    if(urlImagemColecao.value == "" || nomeColecao == ""){
+    if(!urlImagemColecao.value || !nomeColecao.value){
         alert("É necessário preencher todos os campos!")
         return
     }
-    const colecao = {
+    const novaColecao = {
         url: urlImagemColecao.value,
         nome: nomeColecao.value,
-    }    
+    } 
+    
+    salvarColecao(novaColecao)
+    atualizarListaColecao()   
+    alert("Coleção criado com sucesso!")    
+}
+
+function salvarColecao(colecao){
     colecaoList.push(colecao)
     localStorage.setItem("colecaoList", JSON.stringify(colecaoList))
-    alert("Coleção criado com sucesso!")    
 }
 
 // EVENTOS
 btnCriarFigure.addEventListener("click", criarMinifigure)
 btnCriarColecao.addEventListener("click", addColecao)
 
+
+// inicializa a lista de coleções na página
+atualizarListaColecao()
 
 
