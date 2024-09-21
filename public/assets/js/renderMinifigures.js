@@ -1,29 +1,36 @@
-window.addEventListener("load", () => {
-    minifigureData = JSON.parse(localStorage.getItem("minifiguresList")) || []
-    renderMinifigure()
-})
+// window.addEventListener("load", () => {
+//     minifigureData = JSON.parse(localStorage.getItem("minifiguresList")) || []
+//     renderMinifigure()
+// })
 
-function excluirMinifigure(index) {
-    minifigureData.splice(index, 1)
+// function excluirMinifigure(index) {
+//     minifigureData.splice(index, 1)
 
-    localStorage.setItem("minifiguresList", JSON.stringify(minifigureData))
+//     localStorage.setItem("minifiguresList", JSON.stringify(minifigureData))
 
-    renderMinifigure()
-}
+//     renderMinifigure()
+// }
 
-function renderMinifigure() {    
-    const minifigureList = document.querySelector("#minifigures_list")
-    minifigureList.innerHTML = "" 
-    
-    const fragment = document.createDocumentFragment()
+function renderMinifigures() {
+    fetch('http://localhost:3000/minifigures')
+    .then(response => response.json())
+    .then(data => {
+        const minifigureList = document.getElementById('minifigures_list');
+        minifigureList.innerHTML = ""; // Limpa a lista de minifiguras antes de adicionar novas
 
-    minifigureData.forEach((minifigure, index) =>{       
-
-        const newMinifigure = criarMinifigureElelemt(minifigure, index)
-        fragment.appendChild(newMinifigure)        
+        if (data.data.length === 0) {
+            minifigureList.innerHTML = "<p>Nenhuma minifigura encontrada</p>";
+        } else {
+            data.data.forEach(minifigure => {
+                const card = criarMinifigureElelemt(minifigure);
+                minifigureList.appendChild(card);
+            });
+        }
     })
-    minifigureList.appendChild(fragment)
-}  
+    .catch(error => {
+        console.error('Erro ao buscar minifiguras:', error);
+    });
+} 
 
 function criarMinifigureElelemt(minifigure, index) {
     const newMinifigure = document.createElement("div")
@@ -60,7 +67,7 @@ function excluirMinifigure(index) {
     }
 }
 
-
-
-
-
+// Chamar a função ao carregar a página
+document.addEventListener('DOMContentLoaded', () => {
+    renderMinifigures();
+});

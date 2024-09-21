@@ -1,8 +1,5 @@
 window.addEventListener("load", renderColecao)
 
-const colecaoData = JSON.parse(localStorage.getItem("colecaoList"))
-const minifiguresList = JSON.parse(localStorage.getItem("minifiguresList")) || [] 
-
 function criarElemento(tag, className, innerText, attributes = {}) {    
     const elemento = document.createElement(tag)
     if(className) elemento.className = className
@@ -13,24 +10,41 @@ function criarElemento(tag, className, innerText, attributes = {}) {
 }
 
 function renderColecao(){    
-    const colecaoList = document.querySelector("#colecao_list")
-    colecaoList.innerHTML = "" 
-    colecaoData.forEach((colecao, index) => {  
-        const newColecao = criarElemento("div", "colecao", null, {id: colecao.nome})
-        const imageColecao = criarElemento("img", null, null, {src: colecao.url })
-        const nomeColecao = criarElemento("h2", null, colecao.nome)
-        const quantidadeMinifigures = minifiguresList.filter(minifigure => minifigure.colecao === colecao.nome).length
-        const quantidade = criarElemento("p", null, `${quantidadeMinifigures} minifigures`)
-        const mostrarMinifigures = criarElemento("button", null, "mostrar", {id: "mostrarMinifigures"})
-        mostrarMinifigures.addEventListener("click", exibirColecao)
+    fetch('http://localhost:3000/colecoes')
+    .then(response => response.json())
+    .then(data => {
+        const colecaoList = document.getElementById('colecao_list');
+        colecaoList.innerHTML = ""
+
+        if (data.data.length === 0) {
+            colecaoList.innerHTML = "<p>Nenhuma minifigura encontrada</p>";
+        } else {
+            data.data.forEach(colecao => {
+                const card = criarColecaoElelemt(colecao);
+                colecaoList.appendChild(card);
+                
+            });
+        }
         
-        const excluir = criarElemento("button", null, "excluir", {id: "excluir"})
-        excluir.addEventListener("click", () => excluirColecao(index))
-        
-        newColecao.append(imageColecao, nomeColecao, quantidade, mostrarMinifigures, excluir)
-        colecaoList.appendChild(newColecao)         
     })
 }   
+
+function criarColecaoElelemt(colecao, index) {
+    const newColecao = criarElemento("div", "colecao", null, {id: colecao.nome})
+    const imageColecao = criarElemento("img", null, null, {src: colecao.url })
+    const nomeColecao = criarElemento("h2", null, colecao.nome)
+    // const quantidadeMinifigures = minifiguresList.filter(minifigure => minifigure.colecao === colecao.nome).length
+    // const quantidade = criarElemento("p", null, `${quantidadeMinifigures} minifigures`)
+    const mostrarMinifigures = criarElemento("button", null, "mostrar", {id: "mostrarMinifigures"})
+    mostrarMinifigures.addEventListener("click", exibirColecao)
+    
+    const excluir = criarElemento("button", null, "excluir", {id: "excluir"})
+    excluir.addEventListener("click", () => excluirColecao(index))
+    
+    newColecao.append(imageColecao, nomeColecao, mostrarMinifigures, excluir)
+
+    return newColecao
+}
 
 function exibirColecao(event) {    
     const conteudoModal = document.querySelector(".conteudo")
@@ -65,10 +79,4 @@ function exibirModal(){
     modal.style.display = modal.style.display === "block" ? "none" : "block"
 }
 
-function excluirColecao(index) {    
-    colecaoData.splice(index, 1)
-    localStorage.setItem("colecaoList", JSON.stringify(colecaoData))
-
-    renderColecao()
-}    
 
