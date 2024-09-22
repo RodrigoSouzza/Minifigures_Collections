@@ -16,30 +16,31 @@ function renderColecao(){
         const colecaoList = document.getElementById('colecao_list');
         colecaoList.innerHTML = ""
 
-        if (data.data.length === 0) {
-            colecaoList.innerHTML = "<p>Nenhuma minifigura encontrada</p>";
+        if (data.length === 0) {
+            colecaoList.innerHTML = "<p>Nenhuma coleção encontrada</p>";
         } else {
-            data.data.forEach(colecao => {
-                const card = criarColecaoElelemt(colecao);
-                colecaoList.appendChild(card);
-                
+            data.forEach(colecao => {
+                const card = criarColecaoElement(colecao);
+                colecaoList.appendChild(card);                
             });
         }
         
     })
 }   
 
-function criarColecaoElelemt(colecao, index) {
+function criarColecaoElement(colecao) {
+    // div da colecao 
     const newColecao = criarElemento("div", "colecao", null, {id: colecao.nome})
     const imageColecao = criarElemento("img", null, null, {src: colecao.url })
     const nomeColecao = criarElemento("h2", null, colecao.nome)
-    // const quantidadeMinifigures = minifiguresList.filter(minifigure => minifigure.colecao === colecao.nome).length
-    // const quantidade = criarElemento("p", null, `${quantidadeMinifigures} minifigures`)
+
+    // botao para mostrar as minifigures da colecao
     const mostrarMinifigures = criarElemento("button", null, "mostrar", {id: "mostrarMinifigures"})
-    mostrarMinifigures.addEventListener("click", exibirColecao)
-    
+    mostrarMinifigures.addEventListener("click", () => exibirColecao(colecao))
+
+    // botao para excluir a colecao
     const excluir = criarElemento("button", null, "excluir", {id: "excluir"})
-    excluir.addEventListener("click", () => excluirColecao(index))
+    excluir.addEventListener("click", () => excluirColecao(colecao.id))
     
     newColecao.append(imageColecao, nomeColecao, mostrarMinifigures, excluir)
 
@@ -48,16 +49,15 @@ function criarColecaoElelemt(colecao, index) {
 
 function exibirColecao(event) {    
     const conteudoModal = document.querySelector(".conteudo")
-    conteudoModal.innerHTML = " " 
-
-    minifiguresList.forEach(minifigure => {
-        if(minifigure.colecao == event.target.parentElement.id){          
-           
+    conteudoModal.innerHTML = "" 
+    
+    colecaoList.forEach(colecao => {
+        if(minifigure.colecao == event.target.parentElement.id){         
+            
            const newMinifigure = criarElemento("div", "minifigure")
            const imageMinifigure = criarElemento("img", null, null, {src: minifigure.url})
            const nomeMinifigure = criarElemento("h2", null, minifigure.nome)
-           const colecaoMinifigure = criarElemento("p", null, minifigure.colecao)
-           
+           const colecaoMinifigure = criarElemento("p", null, minifigure.colecao)           
            const statusClass = minifigure.status === "ja-tenho" ? "situacao-comprado" : "situacao"
            const statusMinifigure = criarElemento("span", statusClass, minifigure.status === "ja-tenho" ? "ja tenho" : "nao tenho") 
             
@@ -67,7 +67,7 @@ function exibirColecao(event) {
     })
 
     const btnVoltar = criarElemento("button", null, "Voltar", {id: "fecharModal"})
-    btnVoltar.addEventListener("click", exibirModal)
+    btnVoltar.addEventListener("click", () => exibirModal())
 
     conteudoModal.appendChild(btnVoltar)
 
@@ -77,6 +77,22 @@ function exibirColecao(event) {
 function exibirModal(){
     const modal = document.querySelector(".janela-modal")
     modal.style.display = modal.style.display === "block" ? "none" : "block"
+}
+
+function excluirColecao(index) {
+    if (confirm("Você tem certeza que deseja excluir essa coleção?")) {
+        fetch('http://localhost:3000/colecao', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({id:index}),
+        })
+        .then(response => renderColecao())    
+        .catch(error => {
+        console.error('Erro ao apagar coleção: ', error)
+        })
+    }
 }
 
 

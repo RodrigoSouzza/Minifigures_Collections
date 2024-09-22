@@ -12,10 +12,6 @@ const nomeColecao = document.getElementById("nameColecao")
 const formCriarFigure = document.getElementById("formMiniFigure")
 const formCriarColecao = document.getElementById("formColecao")
 
-// dados do local Storage
-let minifiguresList = JSON.parse(localStorage.getItem("minifiguresList")) || []
-let colecaoList = JSON.parse(localStorage.getItem("colecaoList")) || []
-
 // FUNÇÕES
 
 //funcao para atualizar colecao
@@ -23,13 +19,13 @@ function atualizarListaColecao() {
     fetch('http://localhost:3000/colecoes')
     .then(response => response.json())
     .then(data => {
-        const colecao = document.getElementById('colecao'); // Verifique se este é o ID correto
+        const colecao = document.getElementById('colecao');
         colecao.innerHTML = ""; // Limpa a lista de coleções antes de adicionar novas
 
-        if (data.data.length === 0) {
+        if (data.length === 0) {
             colecao.innerHTML = "<option>Nenhuma coleção disponível</option>";
         } else {
-            data.data.forEach(colecaoItem => {
+            data.forEach(colecaoItem => {
                 const option = document.createElement("option");
                 option.value = colecaoItem.nome;
                 option.innerText = colecaoItem.nome;
@@ -42,7 +38,7 @@ function atualizarListaColecao() {
     });
 }
 
-
+// funcao para criar minifigure
 function criarMinifigure(event){    
     event.preventDefault()
     
@@ -62,7 +58,7 @@ function criarMinifigure(event){
 
 //funcao para salvar minifigure
 function salvarMinifigure(minifigure){
-    fetch('http://localhost:3000/minifigures', {
+    fetch('http://localhost:3000/minifigure', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -75,6 +71,7 @@ function salvarMinifigure(minifigure){
     })
 }
 
+// funcao para criar colecao
 function criarColecao(event){
     event.preventDefault()
     if(!urlImagemColecao.value || !nomeColecao.value){
@@ -92,7 +89,7 @@ function criarColecao(event){
 
 //funcao para salvar colecao
 function salvarColecao(colecao){
-    fetch('http://localhost:3000/colecoes', {
+    fetch('http://localhost:3000/colecao', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -111,7 +108,7 @@ function salvarColecao(colecao){
 formCriarFigure.addEventListener("submit", criarMinifigure)
 formCriarColecao.addEventListener("submit", criarColecao)
 
-// Chamar a função ao carregar a página
+// Chama a função ao carregar a página
 document.addEventListener('DOMContentLoaded', () => {
     atualizarListaColecao();
 });

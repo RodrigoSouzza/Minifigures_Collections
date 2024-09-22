@@ -1,27 +1,13 @@
-// window.addEventListener("load", () => {
-//     minifigureData = JSON.parse(localStorage.getItem("minifiguresList")) || []
-//     renderMinifigure()
-// })
-
-// function excluirMinifigure(index) {
-//     minifigureData.splice(index, 1)
-
-//     localStorage.setItem("minifiguresList", JSON.stringify(minifigureData))
-
-//     renderMinifigure()
-// }
-
 function renderMinifigures() {
     fetch('http://localhost:3000/minifigures')
     .then(response => response.json())
     .then(data => {
         const minifigureList = document.getElementById('minifigures_list');
         minifigureList.innerHTML = ""; // Limpa a lista de minifiguras antes de adicionar novas
-
-        if (data.data.length === 0) {
-            minifigureList.innerHTML = "<p>Nenhuma minifigura encontrada</p>";
+        if (data.length === 0) {
+            minifigureList.innerHTML = "<p>Nenhuma minifigure encontrada</p>";
         } else {
-            data.data.forEach(minifigure => {
+            data.forEach(minifigure => {
                 const card = criarMinifigureElelemt(minifigure);
                 minifigureList.appendChild(card);
             });
@@ -52,7 +38,7 @@ function criarMinifigureElelemt(minifigure, index) {
     const excluir = document.createElement("button")
     excluir.setAttribute("id", "excluir")
     excluir.innerText = "excluir"
-    excluir.addEventListener("click", () => excluirMinifigure(index))
+    excluir.addEventListener("click", () => excluirMinifigure(minifigure.id))
 
     newMinifigure.append(imageMinifigure, nomeMinifigure, colecaoMinifigure, statusMinifigure, excluir)
     
@@ -61,9 +47,17 @@ function criarMinifigureElelemt(minifigure, index) {
 
 function excluirMinifigure(index) {
     if (confirm("Você tem certeza que deseja excluir essa minifigura?")) {
-        minifigureData.splice(index, 1);
-        localStorage.setItem("minifiguresList", JSON.stringify(minifigureData));
-        renderMinifigure();
+        fetch('http://localhost:3000/minifigure', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({id:index}),
+        })
+        .then(response => renderMinifigures())    
+        .catch(error => {
+        console.error('Erro ao apagar minifigure: ', error)
+        })
     }
 }
 

@@ -4,20 +4,17 @@ const btnBusca = document.getElementById("buscar");
 
 function exibirBusca() {
     minifigureList.innerHTML = "";
-
     const pesquisaTermo = pesquisaInput.value.trim().toLowerCase();
-
     if (pesquisaTermo === "") {
         alert("Por favor, insira um termo para buscar.");
         return;
     }
-
     fetch('http://localhost:3000/minifigures')
     .then(response => response.json())
     .then(data => {
         let resultadoEncontrado = false;
 
-        data.data.forEach((minifigure) => {
+        data.forEach((minifigure) => {
             const nomeNormalizado = minifigure.nome.toLowerCase();
             const colecaoNormalizada = minifigure.colecao.toLowerCase();
 
@@ -27,7 +24,6 @@ function exibirBusca() {
                 minifigureList.appendChild(newMinifigure);
             }
         });
-
         if (!resultadoEncontrado) {
             const noResult = document.createElement("p");
             noResult.innerText = "Nenhuma minifigura encontrada.";
