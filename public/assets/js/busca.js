@@ -16,7 +16,7 @@ function exibirBusca() {
 
         data.forEach((minifigure) => {
             const nomeNormalizado = minifigure.nome.toLowerCase();
-            const colecaoNormalizada = minifigure.colecao.toLowerCase();
+            const colecaoNormalizada = minifigure.colecao_nome.toLowerCase();
 
             if (nomeNormalizado.includes(pesquisaTermo) || colecaoNormalizada.includes(pesquisaTermo)) {
                 resultadoEncontrado = true;
@@ -26,7 +26,7 @@ function exibirBusca() {
         });
         if (!resultadoEncontrado) {
             const noResult = document.createElement("p");
-            noResult.innerText = "Nenhuma minifigura encontrada.";
+            noResult.innerText = "Nenhuma minifigura ou coleção encontrada.";
             minifigureList.appendChild(noResult);
         }
     })
@@ -46,7 +46,7 @@ function createMinifigureElement(minifigure) {
     nomeMinifigure.innerText = minifigure.nome;
 
     const colecaoMinifigure = document.createElement("p");
-    colecaoMinifigure.innerText = minifigure.colecao;
+    colecaoMinifigure.innerText = minifigure.colecao_nome;
 
     const statusMinifigure = document.createElement("span");
     statusMinifigure.className = minifigure.status === "ja-tenho" ? "situacao-comprado" : "situacao";

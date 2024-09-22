@@ -29,7 +29,7 @@ function criarMinifigureElelemt(minifigure, index) {
     nomeMinifigure.innerText = minifigure.nome
 
     const colecaoMinifigure = document.createElement("p")
-    colecaoMinifigure.innerText = minifigure.colecao
+    colecaoMinifigure.innerText = minifigure.colecao_nome
 
     const statusMinifigure = document.createElement("span")
     statusMinifigure.className = minifigure.status === "ja-tenho" ? "situacao-comprado" : "situacao"
@@ -39,7 +39,6 @@ function criarMinifigureElelemt(minifigure, index) {
     excluir.setAttribute("id", "excluir")
     excluir.innerText = "excluir"
     excluir.addEventListener("click", () => excluirMinifigure(minifigure.id))
-
     newMinifigure.append(imageMinifigure, nomeMinifigure, colecaoMinifigure, statusMinifigure, excluir)
     
     return newMinifigure

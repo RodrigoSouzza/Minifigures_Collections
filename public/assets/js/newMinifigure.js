@@ -23,11 +23,14 @@ function atualizarListaColecao() {
         colecao.innerHTML = ""; // Limpa a lista de coleções antes de adicionar novas
 
         if (data.length === 0) {
-            colecao.innerHTML = "<option>Nenhuma coleção disponível</option>";
+            const option = document.createElement("option");
+            option.value = "";
+            option.innerText = "Nenhuma coleção disponível";
+            colecao.appendChild(option);            
         } else {
             data.forEach(colecaoItem => {
                 const option = document.createElement("option");
-                option.value = colecaoItem.nome;
+                option.value = colecaoItem.id;
                 option.innerText = colecaoItem.nome;
                 colecao.appendChild(option);
             });

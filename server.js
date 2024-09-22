@@ -1,5 +1,4 @@
-// import { openDb } from "./configDB.js"
-import { createTableMinifigure,inserirMinifigure, buscarMinifigures, buscarMinifigure, apagarMinifigure } from "./Controller/Minifigure.js"
+import { createTableMinifigure,inserirMinifigure, buscarMinifigures, buscarMinifigure, apagarMinifigure, buscarMinifiguresColecao } from "./Controller/Minifigure.js"
 import { createTableColecao, inserirColecao, buscarColecoes, apagarColecao } from "./Controller/Colecao.js"
 
 import express from "express"
@@ -15,6 +14,11 @@ createTableColecao()
 // Rotas para minifigure
 app.get('/minifigures', async (req, res) => {
     let minifigures = await buscarMinifigures()
+    res.json(minifigures)
+})
+app.get('/minifigures-colecao', async (req, res) => {
+    const colecao = req.query.colecao
+    let minifigures = await buscarMinifiguresColecao(colecao)
     res.json(minifigures)
 })
 
