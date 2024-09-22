@@ -12,28 +12,26 @@ const nomeColecao = document.getElementById("nameColecao")
 const formCriarFigure = document.getElementById("formMiniFigure")
 const formCriarColecao = document.getElementById("formColecao")
 
-// FUNÇÕES
-
 //funcao para atualizar colecao
 function atualizarListaColecao() {
     fetch('http://localhost:3000/colecoes')
     .then(response => response.json())
     .then(data => {
-        const colecao = document.getElementById('colecao');
-        colecao.innerHTML = ""; // Limpa a lista de coleções antes de adicionar novas
+        const colecao = document.getElementById('colecao')
+        colecao.innerHTML = ""
 
         if (data.length === 0) {
-            const option = document.createElement("option");
-            option.value = "";
-            option.innerText = "Nenhuma coleção disponível";
-            colecao.appendChild(option);            
+            const option = document.createElement("option")
+            option.value = ""
+            option.innerText = "Nenhuma coleção disponível"
+            colecao.appendChild(option)          
         } else {
             data.forEach(colecaoItem => {
-                const option = document.createElement("option");
-                option.value = colecaoItem.id;
-                option.innerText = colecaoItem.nome;
-                colecao.appendChild(option);
-            });
+                const option = document.createElement("option")
+                option.value = colecaoItem.id
+                option.innerText = colecaoItem.nome
+                colecao.appendChild(option)
+            })
         }
     })
     .catch(error => {

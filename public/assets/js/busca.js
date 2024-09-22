@@ -2,63 +2,65 @@ const pesquisaInput = document.querySelector("#pesquisa");
 const minifigureList = document.querySelector("#minifigures_list");
 const btnBusca = document.getElementById("buscar");
 
+// funcao que exibe a busca 
 function exibirBusca() {
-    minifigureList.innerHTML = "";
-    const pesquisaTermo = pesquisaInput.value.trim().toLowerCase();
+    minifigureList.innerHTML = ""
+    const pesquisaTermo = pesquisaInput.value.trim().toLowerCase()
     if (pesquisaTermo === "") {
-        alert("Por favor, insira um termo para buscar.");
+        alert("Por favor, insira um termo para buscar.")
         return;
     }
     fetch('http://localhost:3000/minifigures')
     .then(response => response.json())
     .then(data => {
-        let resultadoEncontrado = false;
+        let resultadoEncontrado = false
 
         data.forEach((minifigure) => {
-            const nomeNormalizado = minifigure.nome.toLowerCase();
-            const colecaoNormalizada = minifigure.colecao_nome.toLowerCase();
+            const nomeNormalizado = minifigure.nome.toLowerCase()
+            const colecaoNormalizada = minifigure.colecao_nome.toLowerCase()
 
             if (nomeNormalizado.includes(pesquisaTermo) || colecaoNormalizada.includes(pesquisaTermo)) {
                 resultadoEncontrado = true;
-                const newMinifigure = createMinifigureElement(minifigure);
-                minifigureList.appendChild(newMinifigure);
+                const newMinifigure = createMinifigureElement(minifigure)
+                minifigureList.appendChild(newMinifigure)
             }
         });
         if (!resultadoEncontrado) {
-            const noResult = document.createElement("p");
-            noResult.innerText = "Nenhuma minifigura ou coleção encontrada.";
-            minifigureList.appendChild(noResult);
+            const noResult = document.createElement("p")
+            noResult.innerText = "Nenhuma minifigura ou coleção encontrada."
+            minifigureList.appendChild(noResult)
         }
     })
     .catch(error => {
-        console.error('Erro ao buscar minifiguras:', error);
-    });
+        console.error('Erro ao buscar minifiguras:', error)
+    })
 }
 
+// funcao que cria o elemento da minifigure
 function createMinifigureElement(minifigure) {
-    const newMinifigure = document.createElement("div");
-    newMinifigure.className = "minifigure";
+    const newMinifigure = document.createElement("div")
+    newMinifigure.className = "minifigure"
 
-    const imageMinifigure = document.createElement("img");
-    imageMinifigure.setAttribute("src", minifigure.url);
+    const imageMinifigure = document.createElement("img")
+    imageMinifigure.setAttribute("src", minifigure.url)
 
-    const nomeMinifigure = document.createElement("h2");
-    nomeMinifigure.innerText = minifigure.nome;
+    const nomeMinifigure = document.createElement("h2")
+    nomeMinifigure.innerText = minifigure.nome
 
-    const colecaoMinifigure = document.createElement("p");
-    colecaoMinifigure.innerText = minifigure.colecao_nome;
+    const colecaoMinifigure = document.createElement("p")
+    colecaoMinifigure.innerText = minifigure.colecao_nome
 
-    const statusMinifigure = document.createElement("span");
-    statusMinifigure.className = minifigure.status === "ja-tenho" ? "situacao-comprado" : "situacao";
-    statusMinifigure.innerText = minifigure.status === "ja-tenho" ? "já tenho" : "não tenho";
+    const statusMinifigure = document.createElement("span")
+    statusMinifigure.className = minifigure.status === "ja-tenho" ? "situacao-comprado" : "situacao"
+    statusMinifigure.innerText = minifigure.status === "ja-tenho" ? "já tenho" : "não tenho"
 
-    newMinifigure.append(imageMinifigure, nomeMinifigure, colecaoMinifigure, statusMinifigure);
-    return newMinifigure;
+    newMinifigure.append(imageMinifigure, nomeMinifigure, colecaoMinifigure, statusMinifigure)
+    return newMinifigure
 }
 
-btnBusca.addEventListener("click", exibirBusca);
+btnBusca.addEventListener("click", exibirBusca)
 pesquisaInput.addEventListener("keypress", (event) => {
     if (event.key === "Enter") {
-        exibirBusca();
+        exibirBusca()
     }
 });

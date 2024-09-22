@@ -1,5 +1,6 @@
 window.addEventListener("load", renderColecao)
 
+// funcao que cria o elemento que e utilizado na criacao da colecao e da minifigure
 function criarElemento(tag, className, innerText, attributes = {}) {    
     const elemento = document.createElement(tag)
     if(className) elemento.className = className
@@ -9,6 +10,7 @@ function criarElemento(tag, className, innerText, attributes = {}) {
     return elemento
 }
 
+// funcao que renderiza colecao
 function renderColecao(){    
     fetch('http://localhost:3000/colecoes')
     .then(response => response.json())
@@ -27,17 +29,15 @@ function renderColecao(){
     })
 }   
 
-function criarColecaoElement(colecao) {
-    // div da colecao 
+// funcao que cria o elemento da colecao
+function criarColecaoElement(colecao) { 
     const newColecao = criarElemento("div", "colecao", null, {id: colecao.nome})
     const imageColecao = criarElemento("img", null, null, {src: colecao.url })
     const nomeColecao = criarElemento("h2", null, colecao.nome)
 
-    // botao para mostrar as minifigures da colecao
     const mostrarMinifigures = criarElemento("button", null, "mostrar", {id: "mostrarMinifigures"})
     mostrarMinifigures.addEventListener("click", () => exibirColecao(colecao))
 
-    // botao para excluir a colecao
     const excluir = criarElemento("button", null, "excluir", {id: "excluir"})
     excluir.addEventListener("click", () => excluirColecao(colecao.id))
     
@@ -46,6 +46,7 @@ function criarColecaoElement(colecao) {
     return newColecao
 }
 
+// funcao que exibe a colecao dentro do modal
 function exibirColecao(colecao) {    
    
     fetch(`http://localhost:3000/minifigures-colecao?colecao=${colecao.id}`)
@@ -55,15 +56,15 @@ function exibirColecao(colecao) {
         conteudoModal.innerHTML = ""
 
         minifigures.forEach(minifigure => {
-            const newMinifigure = criarElemento("div", "minifigure");
-            const imageMinifigure = criarElemento("img", null, null, { src: minifigure.url });
-            const nomeMinifigure = criarElemento("h2", null, minifigure.nome);
+            const newMinifigure = criarElemento("div", "minifigure")
+            const imageMinifigure = criarElemento("img", null, null, { src: minifigure.url })
+            const nomeMinifigure = criarElemento("h2", null, minifigure.nome)
             const colecaoMinifigure = criarElemento("p", null, minifigure.colecao_nome);
-            const statusClass = minifigure.status === "ja-tenho" ? "situacao-comprado" : "situacao";
+            const statusClass = minifigure.status === "ja-tenho" ? "situacao-comprado" : "situacao"
             const statusMinifigure = criarElemento("span", statusClass, minifigure.status === "ja-tenho" ? "já tenho" : "não tenho")
 
-            newMinifigure.append(imageMinifigure, nomeMinifigure, colecaoMinifigure, statusMinifigure);
-            conteudoModal.appendChild(newMinifigure);
+            newMinifigure.append(imageMinifigure, nomeMinifigure, colecaoMinifigure, statusMinifigure)
+            conteudoModal.appendChild(newMinifigure)
         })
         const btnVoltar = criarElemento("button", null, "Voltar", {id: "fecharModal"})
         btnVoltar.addEventListener("click", () => exibirModal())
@@ -73,11 +74,13 @@ function exibirColecao(colecao) {
     })          
 }
 
+// funcao que exibi modal alterando o style do display 
 function exibirModal(){
     const modal = document.querySelector(".janela-modal")
     modal.style.display = modal.style.display === "block" ? "none" : "block"
 }
 
+// funcao que exclui a colecao 
 function excluirColecao(index) {
     if (confirm("Você tem certeza que deseja excluir essa coleção?")) {
         fetch('http://localhost:3000/colecao', {

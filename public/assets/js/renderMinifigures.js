@@ -1,23 +1,25 @@
+// funcao que renderiza as minifigures na tela
 function renderMinifigures() {
     fetch('http://localhost:3000/minifigures')
     .then(response => response.json())
     .then(data => {
-        const minifigureList = document.getElementById('minifigures_list');
-        minifigureList.innerHTML = ""; // Limpa a lista de minifiguras antes de adicionar novas
+        const minifigureList = document.getElementById('minifigures_list')
+        minifigureList.innerHTML = ""
         if (data.length === 0) {
-            minifigureList.innerHTML = "<p>Nenhuma minifigure encontrada</p>";
+            minifigureList.innerHTML = "<p>Nenhuma minifigure encontrada</p>"
         } else {
             data.forEach(minifigure => {
-                const card = criarMinifigureElelemt(minifigure);
-                minifigureList.appendChild(card);
+                const card = criarMinifigureElelemt(minifigure)
+                minifigureList.appendChild(card)
             });
         }
     })
     .catch(error => {
-        console.error('Erro ao buscar minifiguras:', error);
-    });
+        console.error('Erro ao buscar minifiguras:', error)
+    })
 } 
 
+// funcao que cria o elemento da minifigure 
 function criarMinifigureElelemt(minifigure, index) {
     const newMinifigure = document.createElement("div")
     newMinifigure.className = "minifigure"
@@ -44,6 +46,7 @@ function criarMinifigureElelemt(minifigure, index) {
     return newMinifigure
 }
 
+// funcao que exclui a minifigure
 function excluirMinifigure(index) {
     if (confirm("Você tem certeza que deseja excluir essa minifigura?")) {
         fetch('http://localhost:3000/minifigure', {
@@ -60,7 +63,7 @@ function excluirMinifigure(index) {
     }
 }
 
-// Chamar a função ao carregar a página
+// Chama a função ao carregar a página
 document.addEventListener('DOMContentLoaded', () => {
     renderMinifigures();
 });
