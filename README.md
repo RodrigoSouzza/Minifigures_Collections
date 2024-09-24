@@ -40,10 +40,4 @@ O projeto foi desenvolvido de forma básica, mas de um maneira que abordasse o q
 
 ### Segue um video do projeto em funcionamento! 
 
-<<<<<<< HEAD
 https://github.com/user-attachments/assets/ee8b2fcd-1b06-4a85-8ff6-306037c9489e
-=======
-https://github.com/user-attachments/assets/ee8b2fcd-1b06-4a85-8ff6-306037c9489e
-
-
->>>>>>> bcf405ac18ed56fcf9844a69236364dde5445764
