@@ -8,7 +8,7 @@ Esse projeto foi desenvolvido com o intuito de suprir uma necessidade pessoal. E
 
 o projeto possui as seguintes funcionalidades:
 
-Página inicial, mostrando uma barra de navegação com as seguintes opções de navegação: (inicio, nova minifigures, minifigures e coleções e uma barra de pesquisa no fim, onde pode ser pesquisado minifigures separadamente ou por coleções).   
+Página inicial, mostrando uma barra de navegação com as seguintes opções de navegação: (inicio, criar, minifigures e coleções e uma barra de pesquisa no fim, onde pode ser pesquisado minifigures separadamente ou por coleções).   
 
 ### FUNCIONALIDADES
 
@@ -16,7 +16,7 @@ Página inicial, mostrando uma barra de navegação com as seguintes opções de
 
 Essa é a pagina inicial, possui apenas a barra de navegação o nome do projeto centralizado e a barra de pesquisa.
 
-- **Nova minifigures**
+- **Criar**
     
     Essa seção é uma das principais, pois é por ela que é inserido toda nova minifigure e toda nova coleção.
 
@@ -34,4 +34,6 @@ Essa é a pagina inicial, possui apenas a barra de navegação o nome do projeto
 
 ### DETALHES DO PROJETO
 
-Todas as minifigures e coleções estão sendo armazenadas em "local Storage" no próprio navegador, mas futuramente estarei inserindo algum banco de dados para lhe dar com essa situação.
+O projeto foi desenvolvido de forma básica, mas de um maneira que abordasse o que tenho estudado, o corpo do projeto e desenvolvido com Html, css e toda logica do projeto e feito com javascript, o backend está estruturado com nodeJs e express e a integração com banco de dados e feito com o sqlite.
+
+### Segue um video do projeto em funcionamento! 
